@@ -5,5 +5,10 @@ export const CreateOrderSchema = z.object({
     side: z.enum(["yes","no"]),
     type: z.enum(["buy","sell"]),
     price: z.int(),
-    qtry: z.int()
+    qty: z.int()
 })
+
+export type OrderBook = {[key: string] : {
+    availableamount: number,
+    orders: { userId:  string, qty: number, filledQty: number}[]
+}}

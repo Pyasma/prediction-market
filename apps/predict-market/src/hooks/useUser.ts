@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react"
-import { useSupabase } from "@/src/lib/supabase-client"
-import { JwtPayload } from "@supabase/supabase-js"
+import { JwtPayload, SupabaseClient } from "@supabase/supabase-js"
 
-export const useUser = () => {
+export const useUser = (supabase?: SupabaseClient | null) => {
+
     const [claims, setClaims] = useState<JwtPayload | null>(null)
-    const supabase = useSupabase()
 
     useEffect(()=> {
+        if (!supabase?.auth) {
+          return
+        }
+
         supabase.auth.getClaims().then(({data}) => {
         setClaims(data?.claims ?? null)
         })
@@ -19,7 +22,7 @@ export const useUser = () => {
         }) 
 
         return () => subscription.unsubscribe()
-    },[])
+    },[supabase])
     
     return { claims }
 }

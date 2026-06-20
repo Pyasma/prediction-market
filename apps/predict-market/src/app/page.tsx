@@ -1,12 +1,13 @@
 'use client'
 
 import { Button } from "@/components/ui/button"
-import { useUser } from "../hooks/useUser"
-import { useSupabase } from "../lib/supabase-client"
+import { useUser } from "@/hooks/useUser"
+import { useSupabase } from "@/lib/supabase-client"
 
-const  Home = () => {
+
+const Home = () => {
   const supabase = useSupabase()
-  const { claims } = useUser()
+  const { claims } = useUser(supabase)
   return (
     <div>
       {!claims && <Button onClick={() => {
@@ -31,5 +32,4 @@ const  Home = () => {
 }
 
 export default Home
-
 
