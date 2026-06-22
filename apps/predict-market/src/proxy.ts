@@ -34,8 +34,8 @@ export default async function middleware(request: NextRequest) {
         }
         const requestHeaders = new Headers(request.headers)
         requestHeaders.set("address", address ?? "")
-        requestHeaders.set("x-userdb", JSON.stringify(userPayload))
-        requestHeaders.set("x-userinfo", JSON.stringify(user))
+        requestHeaders.set("userdb", JSON.stringify(userPayload))
+        requestHeaders.set("userinfo", JSON.stringify(user))
 
         const response = NextResponse.next({
             request: {

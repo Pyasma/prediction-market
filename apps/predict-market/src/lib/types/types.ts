@@ -9,6 +9,11 @@ export const CreateOrderSchema = z.object({
 })
 
 export type OrderBook = {[key: string] : {
-    availableamount: number,
-    orders: { userId:  string, qty: number, filledQty: number}[]
+    availableQty: number,
+    orders: { userId:  string, qty: number, filledQty: number, originalOrderId: string, reverseOrder : boolean}[]
 }}
+
+export const SplitSchema =  z.object({
+    markedID:  z.string(),
+    amount: z.number(),
+})
